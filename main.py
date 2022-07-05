@@ -16,7 +16,8 @@ start = st.date_input(label='Please enter the starting date when you want the ca
                       value= (datetime.datetime.now() - datetime.timedelta(weeks= 520)))
 
 
-
+years = []
+days_taken = []
 if ticker:
     try:
         historical_data = data.get_data_yahoo(ticker, start, end).reset_index()
