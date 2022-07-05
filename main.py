@@ -20,8 +20,7 @@ start = st.date_input(label='Please enter the starting date when you want the ca
 
 if tickers:
   for ticker in tickers.split(','):
-    st.write("Calculating dividends for " + str(ticker))
-    try:
+        st.write("Calculating dividends for " + str(ticker))
         years = []
         days_taken = []
         historical_data = data.get_data_yahoo(ticker, start, end).reset_index()
@@ -58,6 +57,3 @@ if tickers:
         st.write(np.mean(days_calculation_df.groupby(['Year']).mean().reset_index()['Days Taken'].tolist()))
         years = []
         days_taken = []
-    except:
-        st.write("The stock either did not have dividend this month or you have entered a wrong symbol")          
-  
