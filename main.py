@@ -43,7 +43,10 @@ if ticker:
         column3.dataframe(days_calculation_df)
         for day_cal in days_calculation_df.groupby(['Year']).mean().reset_index().values.tolist():
           st.write("Average days taken to reach target price in the year : " + str(day_cal[0]))
-          st.write(day_cal[1])
+          if day_cal[1]==0:
+            st.write(1)
+          else:  
+            st.write(day_cal[1])
         st.write('Average days taken to reach target price over the 10 years : ')
         st.write(np.mean(days_calculation_df.groupby(['Year']).mean().reset_index()['Days Taken'].tolist()))     
     except:
