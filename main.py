@@ -9,7 +9,7 @@ import streamlit as st
 import plotly.graph_objects as go
 
 st.set_page_config(page_title='Dividend Calculator', page_icon='📊', layout='wide')
-tickers = st.text_input(label='Please enter the symbol of the stock you want to analyze', )
+tickers = st.text_input(label='Please enter the symbols of the stock you want to analyze', )
 
 end = st.date_input(label='Please enter the end date when you want to stop the calculation' ,
                     value = datetime.datetime.now())
@@ -54,9 +54,10 @@ if tickers:
         years = []
         days_taken = []
       except:
-        devidents = yf.Ticker(ticker).dividends.loc[start:end].reset_index()
-        devidents = devidents[devidents['Date'].dt.month == datetime.datetime.today().month]
-        if len(devidents) ==0:
-          st.write('The stock did not give dividend in this month')
-        else:
+        try:
+          devidents = yf.Ticker(ticker).dividends.loc[start:end].reset_index()
+          devidents = devidents[devidents['Date'].dt.month == datetime.datetime.today().month]
+          if len(devidents) ==0:
+            st.write('The stock did not give dividend in this month')
+        except:
           st.write("You have entered the wrong symbol")
