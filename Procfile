@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run water_data_analysis.py
+web: sh setup.sh && streamlit run main.py
