@@ -20,7 +20,8 @@ start = st.date_input(label='Please enter the starting date when you want the ca
 
 if tickers:
   for ticker in tickers.split(','):
-        st.write("Calculating dividends for " + str(ticker))
+      st.write("Calculating dividends for " + str(ticker))
+      try:
         years = []
         days_taken = []
         historical_data = data.get_data_yahoo(ticker, start, end).reset_index()
@@ -42,7 +43,6 @@ if tickers:
         days_calculation_df = pd.DataFrame(columns = ['Year', 'Days Taken'])
         days_calculation_df['Year'] = years
         days_calculation_df['Days Taken'] = days_taken
-        column3.dataframe(days_calculation_df)
         for day_cal in days_calculation_df.groupby(['Year']).mean().reset_index().values.tolist():
           st.write("Average days taken to reach target price in the year : " + str(day_cal[0]))
           if day_cal[1]==0:
@@ -53,3 +53,10 @@ if tickers:
         st.write(np.mean(days_calculation_df.groupby(['Year']).mean().reset_index()['Days Taken'].tolist()))
         years = []
         days_taken = []
+      except:
+        devidents = yf.Ticker(ticker).dividends.loc[start:end].reset_index()
+        devidents = devidents[devidents['Date'].dt.month == datetime.datetime.today().month]
+        if len(devidents) ==0:
+          st.write('The stock did not give dividend in this month')
+        else:
+          st.write("You have entered the wrong symbol")
