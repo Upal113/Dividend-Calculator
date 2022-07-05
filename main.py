@@ -1,6 +1,7 @@
 from cProfile import label
 from pandas_datareader import data
 import datetime
+import numpy as np
 import openpyxl
 import pandas as pd
 import yfinance as yf
