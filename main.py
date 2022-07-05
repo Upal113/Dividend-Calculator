@@ -57,7 +57,7 @@ if tickers:
         try:
           devidents = yf.Ticker(ticker).dividends.loc[start:end].reset_index()
           devidents = devidents[devidents['Date'].dt.month == datetime.datetime.today().month]
-          if len(devidents) ==0:
+          if len(devidents.values.tolist()) == 0:
             st.write('The stock did not give dividend in this month')
         except:
           st.write("You have entered the wrong symbol")
