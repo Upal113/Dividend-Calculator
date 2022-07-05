@@ -20,7 +20,7 @@ start = st.date_input(label='Please enter the starting date when you want the ca
 
 if tickers:
   for ticker in tickers.split(','):
-      st.write("Calculating dividends for " + str(ticker))
+      st.title("Calculating dividends for " + str(ticker))
       try:
         years = []
         days_taken = []
@@ -54,10 +54,4 @@ if tickers:
         years = []
         days_taken = []
       except:
-        try:
-          devidents = yf.Ticker(ticker).dividends.loc[start:end].reset_index()
-          devidents = devidents[devidents['Date'].dt.month == datetime.datetime.today().month]
-          if len(devidents.values.tolist()) == 0:
-            st.write('The stock did not give dividend in this month')
-        except:
-          st.write("You have entered the wrong symbol")
+        st.write("You have either entered the wrong symbol or the stock did not give out dividend  this year.")
