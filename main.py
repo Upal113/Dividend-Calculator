@@ -2,6 +2,7 @@ from cProfile import label
 from pandas_datareader import data
 import datetime
 import openpyxl
+import pandas as pd
 import yfinance as yf
 import streamlit as st
 import plotly.graph_objects as go
