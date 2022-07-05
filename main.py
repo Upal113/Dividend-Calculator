@@ -6,7 +6,7 @@ import yfinance as yf
 import streamlit as st
 import plotly.graph_objects as go
 
-st.set_page_config(page_title='Devident Calculator', page_icon='📊', layout='wide')
+st.set_page_config(page_title='Dividend Calculator', page_icon='📊', layout='wide')
 ticker = st.text_input(label='Please enter the symbol of the stock you want to analyze', )
 
 end = st.date_input(label='Please enter the end date when you want to stop the calculation' ,
