@@ -8,14 +8,9 @@ ipykernel==5.4.0
 ipython==7.19.0
 itsdangerous==2.0.1 
 ipython-genutils==0.2.0
-isort==5.6.3
-itsdangerous==2.0.1
-jsonschema==2.6.0
-pefile==2019.4.18
 pyOpenSSL==19.1.0
 pyparsing==2.4.7
 SQLAlchemy==1.4.17
-threadpoolctl==2.1.0
 gspread==4.0.1
 streamlit==0.89.0
 plotly==5.3.1
