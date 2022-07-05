@@ -8,3 +8,4 @@ pandas
 numpy
 yfinance
 pandas-datareader
+openpyxl
