@@ -20,6 +20,7 @@ start = st.date_input(label='Please enter the starting date when you want the ca
 
 if tickers:
   for ticker in tickers.split(','):
+      ticker = ticker.strip()
       st.title("Calculating dividends for " + str(ticker))
       try:
         years = []
