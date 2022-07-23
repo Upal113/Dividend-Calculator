@@ -27,6 +27,7 @@ if tickers:
         historical_data = data.get_data_yahoo(ticker, start, end).reset_index()
         devidents = yf.Ticker(ticker).dividends.loc[start:end].reset_index()
         devidents = devidents[devidents['Date'].dt.month == datetime.datetime.today().month]
+        st.dataframe(devidents)
         if len(devidents) != 0:
           st.title("Calculating dividends for " + str(ticker))
           for devident in devidents.values.tolist():
@@ -46,12 +47,6 @@ if tickers:
           days_calculation_df['Year'] = years
           days_calculation_df['Days Taken'] = days_taken
           st.dataframe(days_calculation_df)
-          for day_cal in days_calculation_df.groupby(['Year']).mean().reset_index().values.tolist():
-            st.write("Average days taken to reach target price in the year : " + str(day_cal[0]))
-            if day_cal[1]==0:
-              st.write(1)
-            else:  
-              st.write(day_cal[1])
           st.write('Average days taken to reach target price over the 10 years : ')
           st.write(np.mean(days_calculation_df.groupby(['Year']).mean().reset_index()['Days Taken'].tolist()))
           years = []
