@@ -25,7 +25,7 @@ if tickers:
         historical_data = data.get_data_yahoo(ticker, start, end).reset_index()
         devidents = yf.Ticker(ticker).dividends.loc[start:end].reset_index()
         devidents = devidents[devidents['Date'].dt.month == datetime.datetime.today().month]
-        st.write('Dividends in this month for the previous years')
+        st.write('Dividends in this month for the previous years for the stock : ' + str(ticker))
         st.dataframe(devidents)
         if len(devidents) != 0:
           st.title("Calculating dividends for " + str(ticker))
