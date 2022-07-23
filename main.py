@@ -12,7 +12,7 @@ st.set_page_config(page_title='Dividend Calculator', page_icon='📊', layout='w
 tickers = st.text_input(label='Please enter the symbols of the stock you want to analyze', )
 
 end = datetime.datetime.now()
-start = datetime.datetime.now() - datetime.timedelta(weeks= 520))
+start = datetime.datetime.now() - datetime.timedelta(weeks= 520)
 
 
 
