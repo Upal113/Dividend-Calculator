@@ -11,10 +11,8 @@ import plotly.graph_objects as go
 st.set_page_config(page_title='Dividend Calculator', page_icon='📊', layout='wide')
 tickers = st.text_input(label='Please enter the symbols of the stock you want to analyze', )
 
-end = st.date_input(label='Please enter the end date when you want to stop the calculation' ,
-                    value = datetime.datetime.now())
-start = st.date_input(label='Please enter the starting date when you want the calculation to start' , 
-                      value= (datetime.datetime.now() - datetime.timedelta(weeks= 520)))
+end = datetime.datetime.now()
+start = datetime.datetime.now() - datetime.timedelta(weeks= 520))
 
 
 
