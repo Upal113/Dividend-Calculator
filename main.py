@@ -51,4 +51,4 @@ if tickers:
           years = []
           days_taken = []
       except:
-        st.write("You have entered the wrong symbol")
+        st.write("You have entered the wrong symbol" + str(ticker))
