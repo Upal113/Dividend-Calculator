@@ -29,6 +29,7 @@ if tickers:
         devidents = devidents[devidents['Date'].dt.month.between(((datetime.datetime.now() - datetime.timedelta(days=10))).month, ((datetime.datetime.now() + datetime.timedelta(days=90))).month)]
         if len(devidents) != 0:
           st.title("Calculating dividends for " + str(ticker))
+          st.dataframe(devidents)
           for devident in devidents.values.tolist():
             years.append(devident[0].year)
             ten_days_earlier = devident[0] - datetime.timedelta(days=14)
