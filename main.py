@@ -13,6 +13,7 @@ tickers = st.text_input(label='Please enter the symbols of the stock you want to
 
 end = datetime.datetime.now()
 start = datetime.datetime.now() - datetime.timedelta(weeks= 520)
+final_data_sheet = []
 
 
 
@@ -48,7 +49,13 @@ if tickers:
           st.dataframe(days_calculation_df)
           st.write('Average days taken to reach target price over the 10 years : ')
           st.write(np.mean(days_calculation_df.groupby(['Year']).mean().reset_index()['Days Taken'].tolist()))
+          for day_taken in days_taken:
+                if int(day_taken) <= 10:
+                  target_days_under_10_days.append(int(day_taken))
+          percentage = (len(target_days_under_10_days)/len(days_taken))*100
+          final_data_sheet.append([ticker, historical_data.values.tolist()[-1][1], devidents.values.tolist()[-1][1],  devidents.values.tolist()[-1][0] , percentage ])
           years = []
-          days_taken = []
+          days_taken = []   
       except:
         st.write("You have entered the wrong symbol" + str(ticker))
+  st.dataframe(pd.DataFrame(final_data_sheet, columns = ['Symbol', 'Price', 'Current Dividend', 'Last Dividend Date', 'Percentage of Reaching Target']))
