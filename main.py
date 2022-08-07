@@ -26,9 +26,7 @@ if tickers:
         target_days_under_10_days = []
         historical_data = data.get_data_yahoo(ticker, start, end).reset_index()
         devidents = yf.Ticker(ticker).dividends.loc[start:end].reset_index()
-        devidents = devidents[devidents['Date'].dt.month.between(datetime.datetime.today().month, ((datetime.datetime.now() + datetime.timedelta(days=16))).month)]
-        st.write('Dividends in the next 14 days for the previous years for the stock : ' + str(ticker))
-        st.dataframe(devidents)
+        devidents = devidents[devidents['Date'].dt.month.between(((datetime.datetime.now() - datetime.timedelta(days=10))).month, ((datetime.datetime.now() + datetime.timedelta(days=90))).month)]
         if len(devidents) != 0:
           st.title("Calculating dividends for " + str(ticker))
           for devident in devidents.values.tolist():
