@@ -23,6 +23,7 @@ if tickers:
       try:
         years = []
         days_taken = []
+        target_days_under_10_days = []
         historical_data = data.get_data_yahoo(ticker, start, end).reset_index()
         devidents = yf.Ticker(ticker).dividends.loc[start:end].reset_index()
         devidents = devidents[devidents['Date'].dt.month.between(datetime.datetime.today().month, ((datetime.datetime.now() + datetime.timedelta(days=16))).month)]
@@ -43,16 +44,17 @@ if tickers:
               days_taken.append(1)
             else:
               days_taken.append(day_difference.days)
+              
+          for day_taken in days_taken:
+              if int(day_taken) <= 10:
+                  target_days_under_10_days.append(int(day_taken))
+          percentage = (len(target_days_under_10_days)/len(days_taken))*100
           days_calculation_df = pd.DataFrame(columns = ['Year', 'Days Taken'])
           days_calculation_df['Year'] = years
           days_calculation_df['Days Taken'] = days_taken
           st.dataframe(days_calculation_df)
           st.write('Average days taken to reach target price over the 10 years : ')
           st.write(np.mean(days_calculation_df.groupby(['Year']).mean().reset_index()['Days Taken'].tolist()))
-          for day_taken in days_taken:
-                if int(day_taken) <= 10:
-                  target_days_under_10_days.append(int(day_taken))
-          percentage = (len(target_days_under_10_days)/len(days_taken))*100
           final_data_sheet.append([ticker, historical_data.values.tolist()[-1][1], devidents.values.tolist()[-1][1],  devidents.values.tolist()[-1][0] , percentage ])
           years = []
           days_taken = []   
