@@ -52,12 +52,11 @@ if tickers:
           days_calculation_df = pd.DataFrame(columns = ['Year', 'Days Taken'])
           days_calculation_df['Year'] = years
           days_calculation_df['Days Taken'] = days_taken
-          st.dataframe(days_calculation_df)
           st.write('Average days taken to reach target price over the 10 years : ')
           st.write(np.mean(days_calculation_df.groupby(['Year']).mean().reset_index()['Days Taken'].tolist()))
-          final_data_sheet.append([ticker, historical_data.values.tolist()[-1][1], devidents.values.tolist()[-1][1],  devidents.values.tolist()[-1][0] , percentage ])
+          final_data_sheet.append([ticker, historical_data.values.tolist()[-1][1], devidents.values.tolist()[-1][1],  devidents.values.tolist()[-1][0] , percentage, np.mean(days_calculation_df.groupby(['Year']).mean().reset_index()['Days Taken'].tolist()) ])
           years = []
           days_taken = []   
       except:
         st.write("You have entered the wrong symbol" + str(ticker))
-  st.dataframe(pd.DataFrame(final_data_sheet, columns = ['Symbol', 'Price', 'Current Dividend', 'Last Dividend Date', 'Percentage of Reaching Target']))
+  st.dataframe(pd.DataFrame(final_data_sheet, columns = ['Symbol', 'Price', 'Current Dividend', 'Last Dividend Date', 'Percentage of Reaching Target', 'Average Days Taken to Reach Target']))
