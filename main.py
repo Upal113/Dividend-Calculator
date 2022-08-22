@@ -14,7 +14,7 @@ tickers = st.text_input(label='Please enter the symbols of the stock you want to
 end = datetime.datetime.now()
 start = datetime.datetime.now() - datetime.timedelta(weeks= 520)
 final_data_sheet = []
-
+all_devidents = []
 
 
 if tickers:
@@ -29,7 +29,7 @@ if tickers:
         devidents = devidents[devidents['Date'].dt.month.between(((datetime.datetime.now() - datetime.timedelta(days=10))).month, ((datetime.datetime.now() + datetime.timedelta(days=60))).month)]
         if len(devidents) != 0:
           st.title("Calculating dividends for " + str(ticker))
-          st.dataframe(devidents)
+          all_devidents.append([ticker, devidents])
           for devident in devidents.values.tolist():
             years.append(devident[0].year)
             ten_days_earlier = devident[0] - datetime.timedelta(days=14)
@@ -58,4 +58,9 @@ if tickers:
           days_taken = []   
       except:
         st.write("You have entered the wrong symbol" + str(ticker))
+  i = 0      
+  for col in st.columns(len(all_devidents)):
+    col.write(all_devidents[i][0])
+    col.dataframe(all_devidents[i][1])
+    i = i + 1
   st.dataframe(pd.DataFrame(final_data_sheet, columns = ['Symbol', 'Price', 'Current Dividend', 'Last Dividend Date', 'Percentage of Reaching Target', 'Average Days Taken to Reach Target']))
